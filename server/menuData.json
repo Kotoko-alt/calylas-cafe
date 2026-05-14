@@ -1,0 +1,77 @@
+[
+  { "name": "Delivery Fee", "description": "", "price": 20, "category": "Delivery Fee", "photo": "" },
+
+  { "name": "Chocolate Chip Cookie", "description": "", "price": 35, "category": "Cookies", "photo": "" },
+  { "name": "Matcha Cookie", "description": "", "price": 45, "category": "Cookies", "photo": "" },
+  { "name": "Biscoff Cookie", "description": "3pcs available", "price": 45, "category": "Cookies", "photo": "" },
+
+  { "name": "Caramel Bar", "description": "", "price": 30, "category": "Other Pastries", "photo": "" },
+
+  { "name": "French Fries - Sweet Corn", "description": "", "price": 55, "category": "French Fries", "photo": "" },
+  { "name": "French Fries - Cheese", "description": "", "price": 55, "category": "French Fries", "photo": "" },
+  { "name": "French Fries - Plain with Tomato Ketchup", "description": "", "price": 55, "category": "French Fries", "photo": "" },
+  { "name": "French Fries - Sour Cream", "description": "", "price": 55, "category": "French Fries", "photo": "" },
+
+  { "name": "Blueberry Cheesecake Slice", "description": "2pcs available", "price": 125, "category": "Cake Slice", "photo": "" },
+  { "name": "Pistachio Cheesecake Slice", "description": "5pcs available", "price": 120, "category": "Cake Slice", "photo": "" },
+
+  { "name": "Chocolate Cake", "description": "", "price": 335, "category": "Whole Cake", "photo": "" },
+
+  { "name": "Hot Caramel Macchiato", "description": "", "price": 100, "category": "Hot Coffee", "photo": "" },
+  { "name": "Hot Almond Latte", "description": "", "price": 100, "category": "Hot Coffee", "photo": "" },
+  { "name": "Hot Biscoffee", "description": "", "price": 115, "category": "Hot Coffee", "photo": "" },
+  { "name": "Hot Pistachio Latte", "description": "", "price": 120, "category": "Hot Coffee", "photo": "" },
+  { "name": "Hot Salted Caramel", "description": "", "price": 105, "category": "Hot Coffee", "photo": "" },
+  { "name": "Hot Vanilla Latte", "description": "", "price": 105, "category": "Hot Coffee", "photo": "" },
+  { "name": "Hot Americano", "description": "", "price": 80, "category": "Hot Coffee", "photo": "" },
+  { "name": "Hot Cafe Latte", "description": "", "price": 95, "category": "Hot Coffee", "photo": "" },
+  { "name": "Hot Spanish Latte", "description": "", "price": 95, "category": "Hot Coffee", "photo": "" },
+
+  { "name": "Butterscotch", "description": "", "price": 135, "category": "Iced Coffee", "photo": "" },
+  { "name": "Caramel Macchiato", "description": "", "price": 130, "category": "Iced Coffee", "photo": "" },
+  { "name": "Dirty Matcha", "description": "", "price": 145, "category": "Iced Coffee", "photo": "" },
+  { "name": "Cafe Latte", "description": "", "price": 90, "category": "Iced Coffee", "photo": "" },
+  { "name": "Cinnamon Bliss", "description": "", "price": 135, "category": "Iced Coffee", "photo": "" },
+  { "name": "Pistachio Latte", "description": "", "price": 150, "category": "Iced Coffee", "photo": "" },
+  { "name": "Roasted Almond Blend", "description": "", "price": 140, "category": "Iced Coffee", "photo": "" },
+  { "name": "Salted Caramel Latte", "description": "", "price": 130, "category": "Iced Coffee", "photo": "" },
+  { "name": "Vanilla Latte", "description": "", "price": 130, "category": "Iced Coffee", "photo": "" },
+  { "name": "Spanish Latte", "description": "", "price": 120, "category": "Iced Coffee", "photo": "" },
+  { "name": "Biscoffee", "description": "", "price": 145, "category": "Iced Coffee", "photo": "" },
+  { "name": "Americano", "description": "", "price": 90, "category": "Iced Coffee", "photo": "" },
+
+  { "name": "Java Chip Frappe", "description": "", "price": 120, "category": "Coffee-Based Frappucino", "photo": "" },
+  { "name": "Double Dutch Frappe", "description": "", "price": 120, "category": "Coffee-Based Frappucino", "photo": "" },
+  { "name": "Coffee Jelly Frappe", "description": "", "price": 125, "category": "Coffee-Based Frappucino", "photo": "" },
+  { "name": "Matcha Frappe", "description": "", "price": 130, "category": "Coffee-Based Frappucino", "photo": "" },
+
+  { "name": "Hershey's Frappe", "description": "2pcs available", "price": 120, "category": "Non Coffee Frappucino", "photo": "" },
+  { "name": "Mango Frappe", "description": "5pcs available", "price": 120, "category": "Non Coffee Frappucino", "photo": "" },
+  { "name": "Strawberry Frappe", "description": "5pcs available", "price": 120, "category": "Non Coffee Frappucino", "photo": "" },
+  { "name": "Sweet Corn Frappe", "description": "", "price": 90, "category": "Non Coffee Frappucino", "photo": "" },
+  { "name": "Ube Blend", "description": "1pc available", "price": 110, "category": "Non Coffee Frappucino", "photo": "" },
+  { "name": "Cookies & Cream Frappe", "description": "", "price": 120, "category": "Non Coffee Frappucino", "photo": "" },
+
+  { "name": "Hot Cocoa", "description": "", "price": 85, "category": "Hot Latte", "photo": "" },
+  { "name": "Hot Matcha", "description": "", "price": 105, "category": "Hot Latte", "photo": "" },
+
+  { "name": "Choco-Latte", "description": "", "price": 100, "category": "Iced Latte", "photo": "" },
+  { "name": "Blueberry Latte", "description": "", "price": 100, "category": "Iced Latte", "photo": "" },
+  { "name": "Strawberry Latte", "description": "", "price": 100, "category": "Iced Latte", "photo": "" },
+  { "name": "Mango Latte", "description": "", "price": 100, "category": "Iced Latte", "photo": "" },
+  { "name": "Strawberry-Matcha Latte", "description": "", "price": 125, "category": "Iced Latte", "photo": "" },
+  { "name": "Matcha Latte", "description": "", "price": 120, "category": "Iced Latte", "photo": "" },
+
+  { "name": "Blueberry Soda", "description": "", "price": 80, "category": "Fruit Soda", "photo": "" },
+  { "name": "Green Apple Soda", "description": "", "price": 75, "category": "Fruit Soda", "photo": "" },
+  { "name": "Lychee Soda", "description": "", "price": 75, "category": "Fruit Soda", "photo": "" },
+  { "name": "Peach Soda", "description": "", "price": 75, "category": "Fruit Soda", "photo": "" },
+  { "name": "Lemon Soda", "description": "", "price": 75, "category": "Fruit Soda", "photo": "" },
+
+  { "name": "Coffee Jelly", "description": "", "price": 15, "category": "Add-Ons", "photo": "" },
+  { "name": "Full Cream Milk", "description": "", "price": 10, "category": "Add-Ons", "photo": "" },
+  { "name": "Nata de Coco", "description": "", "price": 10, "category": "Add-Ons", "photo": "" },
+  { "name": "Whipped Cream", "description": "", "price": 10, "category": "Add-Ons", "photo": "" },
+  { "name": "Jam", "description": "", "price": 25, "category": "Add-Ons", "photo": "" },
+  { "name": "Syrup / Sauce", "description": "", "price": 20, "category": "Add-Ons", "photo": "" }
+]
