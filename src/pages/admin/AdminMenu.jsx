@@ -41,7 +41,7 @@ export default function AdminMenu() {
 
   const fetchItems = () => {
 
-    axios.get('/api/menu')
+    axios.get('http://localhost:5000/api/menu')
       .then(res => setItems(res.data))
       .finally(() => setLoading(false))
   }
@@ -94,16 +94,16 @@ export default function AdminMenu() {
       if (editId) {
 
         await axios.put(
-          `/api/menu/${editId}`,
-          data
-        )
+        `http://localhost:5000/api/menu/${editId}`,
+        data
+      )
 
       } else {
 
-        await axios.post(
-          '/api/menu',
-          data
-        )
+            await axios.post(
+        'http://localhost:5000/api/menu',
+        data
+      )
 
       }
 
@@ -158,7 +158,7 @@ export default function AdminMenu() {
 
     if (!confirm('Delete this item?')) return
 
-    await axios.delete(`/api/menu/${id}`)
+    await axios.delete(`http://localhost:5000/api/menu/${id}`)
 
     fetchItems()
   }

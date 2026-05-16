@@ -15,7 +15,7 @@ export default function AdminOrders() {
 
   const fetchOrders = () => {
 
-    axios.get('/api/orders')
+    axios.get('http://localhost:5000/api/orders')
       .then(res => setOrders(res.data))
       .finally(() => setLoading(false))
   }
@@ -31,10 +31,10 @@ export default function AdminOrders() {
 
     try {
 
-      await axios.put(
-        `/api/orders/${id}`,
-        { status }
-      )
+        await axios.put(
+      `http://localhost:5000/api/orders/${id}`,
+      { status }
+    )
 
       fetchOrders()
 

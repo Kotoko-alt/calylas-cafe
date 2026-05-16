@@ -22,7 +22,7 @@ export default function AdminUsers() {
 
   const fetchUsers = () => {
 
-    axios.get('/api/users')
+    axios.get('http://localhost:5000/api/users')
       .then(res => setUsers(res.data))
       .finally(() => setLoading(false))
   }
@@ -47,10 +47,10 @@ export default function AdminUsers() {
 
     try {
 
-      await axios.post(
-        '/api/users',
-        form
-      )
+    await axios.post(
+  'http://localhost:5000/api/users',
+  form
+)
 
       setForm(emptyForm)
 
@@ -81,8 +81,8 @@ export default function AdminUsers() {
     try {
 
       await axios.delete(
-        `/api/users/${id}`
-      )
+      `http://localhost:5000/api/users/${id}`
+    )
 
       fetchUsers()
 

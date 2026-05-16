@@ -9,11 +9,20 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    axios.get('/api/menu')
-      .then(res => setMenuItems(res.data))
-      .catch(() => setMenuItems([]))
-      .finally(() => setLoading(false))
-  }, [])
+  axios
+    .get('http://localhost:5000/api/menu')
+    .then((res) => {
+      console.log(res.data)
+      setMenuItems(res.data)
+    })
+    .catch((err) => {
+      console.error(err)
+      setMenuItems([])
+    })
+    .finally(() => {
+      setLoading(false)
+    })
+}, [])
 
   const grouped = menuItems.reduce((groups, item) => {
     const cat = item.category || 'Others'
