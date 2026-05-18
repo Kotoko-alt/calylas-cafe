@@ -4,10 +4,7 @@ const path = require('path')
 const Menu = require('../models/Menu')
 const auth = require('../middleware/auth')
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'uploads/'),
-  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname)),
-})
+const storage = multer.memoryStorage()
 const upload = multer({ storage })
 
 // Get all menu items (public)
@@ -29,10 +26,31 @@ router.post('/', auth, upload.single('photo'), async (req, res) => {
       description,
       price,
       category,
-      photo: req.file ? req.file.filename : '',
+      photo: req.file
+        ? {
+            filename: `${Date.now()}_${req.file.originalname}`,
+            data: req.file.buffer,
+            contentType: req.file.mimetype,
+          }
+        : {},
     })
     await item.save()
     res.status(201).json(item)
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
+// Get menu item photo (public)
+router.get('/:id/photo', async (req, res) => {
+  try {
+    const item = await Menu.findById(req.params.id).select('+photo.data')
+    if (!item || !item.photo || !item.photo.data || !item.photo.contentType) {
+      return res.status(404).json({ message: 'Photo not found' })
+    }
+
+    res.contentType(item.photo.contentType)
+    res.send(item.photo.data)
   } catch (err) {
     res.status(500).json({ message: 'Server error' })
   }
@@ -43,7 +61,13 @@ router.put('/:id', auth, upload.single('photo'), async (req, res) => {
   try {
     const { name, description, price, category } = req.body
     const update = { name, description, price, category }
-    if (req.file) update.photo = req.file.filename
+    if (req.file) {
+      update.photo = {
+        filename: `${Date.now()}_${req.file.originalname}`,
+        data: req.file.buffer,
+        contentType: req.file.mimetype,
+      }
+    }
     const item = await Menu.findByIdAndUpdate(req.params.id, update, { new: true })
     if (!item) return res.status(404).json({ message: 'Item not found' })
     res.json(item)

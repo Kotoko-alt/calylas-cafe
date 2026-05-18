@@ -26,6 +26,26 @@ const emptyForm = {
   photo: null,
 }
 
+const buildPhotoSrc = item => {
+  const photoFromName = item && item.name
+    ? `http://localhost:5000/api/uploads/${encodeURIComponent(item.name.trim())}.png`
+    : null
+
+  if (!item || !item.photo) return photoFromName
+  if (typeof item.photo === 'string') {
+    return `http://localhost:5000/api/uploads/${item.photo}`
+  }
+  if (item.photoUrl) {
+    return item.photoUrl.startsWith('http')
+      ? item.photoUrl
+      : `http://localhost:5000${item.photoUrl}`
+  }
+  if (item.photo.filename) {
+    return `http://localhost:5000/api/uploads/${item.photo.filename}`
+  }
+  return photoFromName
+}
+
 export default function AdminMenu() {
 
   const [items, setItems] = useState([])
@@ -140,11 +160,7 @@ export default function AdminMenu() {
 
     setEditId(item._id)
 
-    setPreview(
-      item.photo
-        ? `http://localhost:5000/api/uploads/${item.photo}`
-        : null
-    )
+    setPreview(buildPhotoSrc(item))
 
     setShowForm(true)
 
@@ -757,7 +773,7 @@ export default function AdminMenu() {
                     {item.photo ? (
 
                       <img
-                        src={`http://localhost:5000/api/uploads/${item.photo}`}
+                        src={buildPhotoSrc(item)}
                         alt={item.name}
 
                         style={{

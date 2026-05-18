@@ -1,12 +1,78 @@
 import { useState } from 'react'
 import { useCart } from '../context/CartContext'
 
+const normalizeMenuName = name =>
+  name
+    .trim()
+    .replace(/[’'\.,]/g, '')
+    .replace(/\s+/g, ' ')
+
+const buildMenuNameCandidates = name => {
+  if (!name) return []
+  const normalized = normalizeMenuName(name)
+  const compact = normalized.replace(/\s+/g, '')
+  const dash = normalized.replace(/\s+/g, '-')
+  const underscore = normalized.replace(/\s+/g, '_')
+  return [normalized, compact, dash, underscore].filter((value, index, self) => value && self.indexOf(value) === index)
+}
+
+const explicitNameToFile = {
+  'Delivery Fee': 'DeliveryFee.png',
+  'Matcha Cookie': 'MatchaCookie.png',
+}
+
+const buildPhotoSrcCandidates = item => {
+  if (!item) return []
+  const candidates = []
+
+  if (item._id && item.photo) {
+    candidates.push(`http://localhost:5000/api/menu/${item._id}/photo`)
+  }
+  if (typeof item.photo === 'string') {
+    candidates.push(`http://localhost:5000/api/uploads/${item.photo}`)
+  }
+  if (item.photoUrl) {
+    const photoUrl = item.photoUrl.startsWith('http')
+      ? item.photoUrl
+      : `http://localhost:5000${item.photoUrl}`
+    candidates.push(photoUrl)
+  }
+  if (item.photo && item.photo.filename) {
+    candidates.push(`http://localhost:5000/api/uploads/${item.photo.filename}`)
+  }
+
+  const override = explicitNameToFile[item.name?.trim()]
+  if (override) {
+    candidates.push(`http://localhost:5000/api/uploads/${encodeURIComponent(override)}`)
+  }
+  for (const name of buildMenuNameCandidates(item.name)) {
+    candidates.push(`http://localhost:5000/api/uploads/${encodeURIComponent(name)}.png`)
+    candidates.push(`http://localhost:5000/api/uploads/${encodeURIComponent(name)}.webp`)
+  }
+  return candidates
+}
+
+const buildPhotoSrc = item => buildPhotoSrcCandidates(item)[0] || null
+
 export default function MenuModal({ item, onClose }) {
 
   const { addToCart } = useCart()
+  const photoCandidates = buildPhotoSrcCandidates(item)
+  const photoSrc = photoCandidates[0]
 
   const [qty, setQty] = useState(1)
   const [added, setAdded] = useState(false)
+
+  const handleImgError = e => {
+    const candidates = e.currentTarget.dataset.srcCandidates?.split('|') || []
+    const current = e.currentTarget.src
+    const index = candidates.findIndex(url => url === current)
+    if (index >= 0 && index < candidates.length - 1) {
+      e.currentTarget.src = candidates[index + 1]
+    } else {
+      e.currentTarget.onerror = null
+    }
+  }
 
   const handleAdd = () => {
 
@@ -145,10 +211,12 @@ export default function MenuModal({ item, onClose }) {
           }}
         >
 
-          {item.photo ? (
+          {photoSrc ? (
 
             <img
-              src={`http://localhost:5000/api/uploads/${item.photo}`}
+              src={photoSrc}
+              data-src-candidates={photoCandidates.join('|')}
+              onError={handleImgError}
               alt={item.name}
 
               style={{

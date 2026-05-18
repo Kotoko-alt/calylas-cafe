@@ -311,9 +311,11 @@ export default function Navbar() {
                     'uppercase',
 
                   transition:
-                    'all .3s cubic-bezier(.16,1,.3,1)',
+                    'all .2s cubic-bezier(.16,1,.3,1)',
 
                   cursor: 'pointer',
+                  touchAction: 'manipulation',
+                  userSelect: 'none',
                 }}
 
                 onMouseEnter={e => {
@@ -336,6 +338,43 @@ export default function Navbar() {
                       'transparent'
                   }
 
+                }}
+
+                onMouseDown={e => {
+                  e.currentTarget.style.background =
+                    'rgba(255,255,255,0.12)'
+                  e.currentTarget.style.color = '#fff'
+                }}
+
+                onMouseUp={e => {
+                  if (!isActive) {
+                    e.currentTarget.style.color =
+                      'rgba(255,255,255,0.68)'
+                    e.currentTarget.style.background =
+                      'transparent'
+                  } else {
+                    e.currentTarget.style.background =
+                      'rgba(255,255,255,0.06)'
+                  }
+                }}
+
+                onClick={() => setActive(link.href)}
+                onTouchStart={e => {
+                  e.currentTarget.style.background =
+                    'rgba(255,255,255,0.12)'
+                  e.currentTarget.style.color = '#fff'
+                }}
+
+                onTouchEnd={e => {
+                  if (!isActive) {
+                    e.currentTarget.style.color =
+                      'rgba(255,255,255,0.68)'
+                    e.currentTarget.style.background =
+                      'transparent'
+                  } else {
+                    e.currentTarget.style.background =
+                      'rgba(255,255,255,0.06)'
+                  }
                 }}
               >
 
@@ -410,6 +449,9 @@ export default function Navbar() {
 
           boxShadow:
             '0 16px 40px rgba(196,122,43,0.35)',
+
+          transform: 'translateY(0px) scale(1)',
+          willChange: 'transform, box-shadow',
 
           transition:
             'all .35s cubic-bezier(.16,1,.3,1)',
