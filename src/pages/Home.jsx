@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import API_URL from '../config/api'
 import Navbar from '../components/Navbar'
 import MenuCard from '../components/MenuCard'
 import Cart from '../components/Cart'
@@ -13,7 +14,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/menu')
+      .get(`${API_URL}/api/menu`)
       .then((res) => {
         console.log(res.data)
         setMenuItems(res.data)
@@ -61,28 +62,28 @@ export default function Home() {
     const candidates = []
 
     if (item._id && item.photo) {
-      candidates.push(`http://localhost:5000/api/menu/${item._id}/photo`)
+      candidates.push(`${API_URL}/api/menu/${item._id}/photo`)
     }
     if (typeof item.photo === 'string') {
-      candidates.push(`http://localhost:5000/api/uploads/${item.photo}`)
+      candidates.push(`${API_URL}/api/uploads/${item.photo}`)
     }
     if (item.photoUrl) {
       const photoUrl = item.photoUrl.startsWith('http')
         ? item.photoUrl
-        : `http://localhost:5000${item.photoUrl}`
+        : `${API_URL}${item.photoUrl}`
       candidates.push(photoUrl)
     }
     if (item.photo && item.photo.filename) {
-      candidates.push(`http://localhost:5000/api/uploads/${item.photo.filename}`)
+      candidates.push(`${API_URL}/api/uploads/${item.photo.filename}`)
     }
 
     const override = explicitNameToFile[item.name?.trim()]
     if (override) {
-      candidates.push(`http://localhost:5000/api/uploads/${encodeURIComponent(override)}`)
+      candidates.push(`${API_URL}/api/uploads/${encodeURIComponent(override)}`)
     }
     for (const name of buildMenuNameCandidates(item.name)) {
-      candidates.push(`http://localhost:5000/api/uploads/${encodeURIComponent(name)}.png`)
-      candidates.push(`http://localhost:5000/api/uploads/${encodeURIComponent(name)}.webp`)
+      candidates.push(`${API_URL}/api/uploads/${encodeURIComponent(name)}.png`)
+      candidates.push(`${API_URL}/api/uploads/${encodeURIComponent(name)}.webp`)
     }
     return candidates
   }
@@ -143,7 +144,7 @@ export default function Home() {
       {/* HERO */}
       <section id="hero" style={{
         minHeight: '100vh',
-        backgroundImage: `linear-gradient(180deg, rgba(9,9,9,0.92) 0%, rgba(9,9,9,0.62) 30%, rgba(9,9,9,0.85) 100%), url('http://localhost:5000/api/uploads/hero.webp')`,
+        backgroundImage: `linear-gradient(180deg, rgba(9,9,9,0.92) 0%, rgba(9,9,9,0.62) 30%, rgba(9,9,9,0.85) 100%), url('${API_URL}/api/uploads/hero.webp')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -189,7 +190,7 @@ export default function Home() {
             <div style={{ borderRadius: 32, overflow: 'hidden', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.14)', boxShadow: '0 34px 100px rgba(0,0,0,0.22)', backdropFilter: 'blur(16px)', transition: 'transform 0.35s ease, opacity 0.35s ease', transform: featuredIsAnimating ? 'scale(0.98)' : 'scale(1)', opacity: featuredIsAnimating ? 0.9 : 1 }}>
               <div style={{ position: 'relative', height: 520, overflow: 'hidden' }}>
                 <img
-                  src={buildMenuPhotoSrc(featuredMenuItem) || 'http://localhost:5000/api/uploads/hero.webp'}
+                  src={buildMenuPhotoSrc(featuredMenuItem) || `${API_URL}/api/uploads/hero.webp`}
                   data-src-candidates={buildMenuPhotoSrcCandidates(featuredMenuItem).join('|')}
                   onError={handleImgError}
                   alt={featuredMenuItem ? featuredMenuItem.name : 'Featured coffee'}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import API_URL from '../config/api'
 import { useCart } from '../context/CartContext'
 
 const normalizeMenuName = name =>
@@ -26,28 +27,28 @@ const buildPhotoSrcCandidates = item => {
   const candidates = []
 
   if (item._id && item.photo) {
-    candidates.push(`http://localhost:5000/api/menu/${item._id}/photo`)
+    candidates.push(`${API_URL}/api/menu/${item._id}/photo`)
   }
   if (typeof item.photo === 'string') {
-    candidates.push(`http://localhost:5000/api/uploads/${item.photo}`)
+    candidates.push(`${API_URL}/api/uploads/${item.photo}`)
   }
   if (item.photoUrl) {
     const photoUrl = item.photoUrl.startsWith('http')
       ? item.photoUrl
-      : `http://localhost:5000${item.photoUrl}`
+      : `${API_URL}${item.photoUrl}`
     candidates.push(photoUrl)
   }
   if (item.photo && item.photo.filename) {
-    candidates.push(`http://localhost:5000/api/uploads/${item.photo.filename}`)
+    candidates.push(`${API_URL}/api/uploads/${item.photo.filename}`)
   }
 
   const override = explicitNameToFile[item.name?.trim()]
   if (override) {
-    candidates.push(`http://localhost:5000/api/uploads/${encodeURIComponent(override)}`)
+    candidates.push(`${API_URL}/api/uploads/${encodeURIComponent(override)}`)
   }
   for (const name of buildMenuNameCandidates(item.name)) {
-    candidates.push(`http://localhost:5000/api/uploads/${encodeURIComponent(name)}.png`)
-    candidates.push(`http://localhost:5000/api/uploads/${encodeURIComponent(name)}.webp`)
+    candidates.push(`${API_URL}/api/uploads/${encodeURIComponent(name)}.png`)
+    candidates.push(`${API_URL}/api/uploads/${encodeURIComponent(name)}.webp`)
   }
   return candidates
 }

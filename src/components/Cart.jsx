@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import API_URL from '../config/api'
 import { useCart } from '../context/CartContext'
 import axios from 'axios'
 

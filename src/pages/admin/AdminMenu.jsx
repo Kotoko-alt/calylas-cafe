@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import API_URL from '../../config/api'
 
 const CATEGORIES = [
   'Hot Coffee',
@@ -28,20 +29,20 @@ const emptyForm = {
 
 const buildPhotoSrc = item => {
   const photoFromName = item && item.name
-    ? `http://localhost:5000/api/uploads/${encodeURIComponent(item.name.trim())}.png`
+    ? `${API_URL}/api/uploads/${encodeURIComponent(item.name.trim())}.png`
     : null
 
   if (!item || !item.photo) return photoFromName
   if (typeof item.photo === 'string') {
-    return `http://localhost:5000/api/uploads/${item.photo}`
+    return `${API_URL}/api/uploads/${item.photo}`
   }
   if (item.photoUrl) {
     return item.photoUrl.startsWith('http')
       ? item.photoUrl
-      : `http://localhost:5000${item.photoUrl}`
+      : `${API_URL}${item.photoUrl}`
   }
   if (item.photo.filename) {
-    return `http://localhost:5000/api/uploads/${item.photo.filename}`
+    return `${API_URL}/api/uploads/${item.photo.filename}`
   }
   return photoFromName
 }
@@ -61,7 +62,7 @@ export default function AdminMenu() {
 
   const fetchItems = () => {
 
-    axios.get('http://localhost:5000/api/menu')
+    axios.get(`${API_URL}/api/menu`)
       .then(res => setItems(res.data))
       .finally(() => setLoading(false))
   }
@@ -114,14 +115,14 @@ export default function AdminMenu() {
       if (editId) {
 
         await axios.put(
-        `http://localhost:5000/api/menu/${editId}`,
+        `${API_URL}/api/menu/${editId}`,
         data
       )
 
       } else {
 
             await axios.post(
-        'http://localhost:5000/api/menu',
+        `${API_URL}/api/menu`,
         data
       )
 
@@ -174,7 +175,7 @@ export default function AdminMenu() {
 
     if (!confirm('Delete this item?')) return
 
-    await axios.delete(`http://localhost:5000/api/menu/${id}`)
+    await axios.delete(`${API_URL}/api/menu/${id}`)
 
     fetchItems()
   }
